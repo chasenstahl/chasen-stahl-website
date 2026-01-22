@@ -2,10 +2,10 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "Chasen Stahl",
     "description": "",
-    "home_page_url": "https://www.chasenstahl.com",
-    "feed_url": "https://www.chasenstahl.com/feed.json",
+    "home_page_url": "https://chasenstahl.com",
+    "feed_url": "https://chasenstahl.com/feed.json",
     "user_comment": "",
-    "icon": "https://www.chasenstahl.com/media/website/chase_portrait-2.jpg",
+    "icon": "https://chasenstahl.com/media/website/chase_portrait-2.jpg",
     "author": {
         "name": "Chasen Stahl"
     },
