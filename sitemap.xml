@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://www.chasenstahl.com/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url>
+<loc>https://www.chasenstahl.com/</loc>
+</url>
+<url>
+<loc>https://www.chasenstahl.com/curriculum-vitae.html</loc>
+<lastmod>2025-07-31T00:46:38+09:00</lastmod>
+</url>
+<url>
+<loc>https://www.chasenstahl.com/media.html</loc>
+<lastmod>2025-07-31T00:54:30+09:00</lastmod>
+</url>
+<url>
+<loc>https://www.chasenstahl.com/papers.html</loc>
+<lastmod>2025-04-29T13:28:49+09:00</lastmod>
+</url>
+<url>
+<loc>https://www.chasenstahl.com/presentations.html</loc>
+<lastmod>2025-04-29T13:28:57+09:00</lastmod>
+</url>
+</urlset>
