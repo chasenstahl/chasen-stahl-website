@@ -3,7 +3,7 @@
     <title>Chasen Stahl</title>
     <link href="https://chasenstahl.com/feed.xml" rel="self" />
     <link href="https://chasenstahl.com" />
-    <updated>2026-04-21T00:44:39+09:00</updated>
+    <updated>2026-04-21T00:47:57+09:00</updated>
     <author>
         <name>Chasen Stahl</name>
     </author>
@@ -16,15 +16,21 @@
         </author>
         <link href="https://chasenstahl.com/the-neurobiology-of-rigor-in-ib-contexts.html"/>
         <id>https://chasenstahl.com/the-neurobiology-of-rigor-in-ib-contexts.html</id>
+        <media:content url="https://chasenstahl.com/media/posts/8/learning_brain-2.png" medium="image" />
+            <category term="student wellbeing"/>
+            <category term="neuroscience"/>
+            <category term="learning science"/>
 
         <updated>2026-04-20T03:08:26+09:00</updated>
             <summary>
                 <![CDATA[
+                        <img src="https://chasenstahl.com/media/posts/8/learning_brain-2.png" alt="" />
                     How should we define rigor in an IB context and how can we cultivate the conditions necessary to enable it? There is a question I have been unable to satisfactorily address throughout my career so far: how do we maintain the high academic standards the&hellip;
                 ]]>
             </summary>
         <content type="html">
             <![CDATA[
+                    <p><img src="https://chasenstahl.com/media/posts/8/learning_brain-2.png" class="type:primaryImage" alt="" /></p>
                 <p class="subtitle">How should we define rigor in an IB context and how can we cultivate the conditions necessary to enable it?</p>
 <p class="dropcap">There is a question I have been unable to satisfactorily address throughout my career so far: how do we maintain the high academic standards the International Baccalaureate (or any curriculum) demands without harming the very students we are trying to empower? As I suspect is the case for most people working in education, this is the kind of question that tends to flit around the edges of one's consciousness whilst focusing on more urgent matters. It comes up in staff meetings and curriculum reviews and while reflecting on how various school initiatives are proceeding, but the concept of "positive rigor" usually feels too vague or too "high concept" to make any sort of concrete start on addressing.</p>
 <p>Coincidentally, I was asked to present on just this topic at the 2026 IB Association of Japan engagement event in Tokyo, and preparing for that talk forced me to do something I had always thought about but never actually done: take the time to deeply research and synthesize what "rigor" means, properly and scientifically, drawing on what the research now tells us rather than on the accumulated assumptions of a profession that can often lean on "common knowledge" or personal wisdom to address such issues. What I found was both clarifying and, in some respects, a bit unsettling, because it suggests that many of the strategies we tend to reach for when we want to demonstrate academic seriousness are not just unhelpful but are, in an empirical, neurobiological sense, actively counterproductive to learning and sometimes harmful to students.</p>
