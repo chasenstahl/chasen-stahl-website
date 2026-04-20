@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Brain Hierarchy — Perry / Purnell Model</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral-50: #FAECE7; --coral-100: #F5C4B3; --coral-400: #D85A30; --coral-600: #993C1D; --coral-800: #712B13;
+      --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-400: #BA7517; --amber-600: #854F0B; --amber-800: #633806;
+      --teal-50:  #E1F5EE; --teal-100:  #9FE1CB; --teal-400:  #1D9E75; --teal-600:  #0F6E56; --teal-800:  #085041;
+      --purple-50: #EEEDFE; --purple-100: #CECBF6; --purple-400: #7F77DD; --purple-600: #534AB7; --purple-800: #3C3489;
+      --gray-100: #D3D1C7; --gray-400: #888780; --gray-600: #5F5E5A;
+
+      --bg: #faf9f7;
+      --text-primary: #1a1917;
+      --text-secondary: #5f5e5a;
+      --text-tertiary: #888780;
+      --border: rgba(0,0,0,0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #181715;
+        --text-primary: #e8e6e0;
+        --text-secondary: #b4b2a9;
+        --text-tertiary: #888780;
+        --border: rgba(255,255,255,0.1);
+        --coral-50: #4A1B0C; --coral-100: #712B13; --coral-400: #F0997B; --coral-600: #F5C4B3; --coral-800: #FAECE7;
+        --amber-50: #412402; --amber-100: #633806; --amber-400: #EF9F27; --amber-600: #FAC775; --amber-800: #FAEEDA;
+        --teal-50:  #04342C; --teal-100:  #085041; --teal-400:  #5DCAA5; --teal-600:  #9FE1CB; --teal-800:  #E1F5EE;
+        --purple-50: #26215C; --purple-100: #3C3489; --purple-400: #AFA9EC; --purple-600: #CECBF6; --purple-800: #EEEDFE;
+      }
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 820px;
+      width: 100%;
+    }
+
+    header {
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .diagram-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px 24px;
+      margin-bottom: 32px;
+    }
+
+    svg { display: block; width: 100%; height: auto; }
+
+    .layer-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 580px) {
+      .layer-info { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .chip {
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .chip:hover { opacity: 0.85; }
+
+    .chip-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .chip-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 2px;
+    }
+
+    .chip-sub {
+      font-size: 11px;
+    }
+
+    .chip-coral  { background: var(--coral-50);  }
+    .chip-coral  .chip-label, .chip-coral  .chip-title { color: var(--coral-800); }
+    .chip-coral  .chip-sub  { color: var(--coral-600); }
+
+    .chip-amber  { background: var(--amber-50);  }
+    .chip-amber  .chip-label, .chip-amber  .chip-title { color: var(--amber-800); }
+    .chip-amber  .chip-sub  { color: var(--amber-600); }
+
+    .chip-teal   { background: var(--teal-50);   }
+    .chip-teal   .chip-label, .chip-teal   .chip-title { color: var(--teal-800); }
+    .chip-teal   .chip-sub  { color: var(--teal-600); }
+
+    .chip-purple { background: var(--purple-50); }
+    .chip-purple .chip-label, .chip-purple .chip-title { color: var(--purple-800); }
+    .chip-purple .chip-sub  { color: var(--purple-600); }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+    }
+
+    /* SVG text styles */
+    .t  { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; fill: var(--text-primary); }
+    .ts { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; fill: var(--text-secondary); }
+    .th { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; fill: var(--text-primary); }
+
+    /* Layer text: on colored fills use fixed colors */
+    .label-coral  { fill: var(--coral-800);  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; }
+    .label-sub-coral { fill: var(--coral-600); font-family: 'DM Sans', sans-serif; font-size: 12px; }
+    .label-amber  { fill: var(--amber-800);  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; }
+    .label-sub-amber { fill: var(--amber-600); font-family: 'DM Sans', sans-serif; font-size: 12px; }
+    .label-teal   { fill: var(--teal-800);   font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; }
+    .label-sub-teal  { fill: var(--teal-600);  font-family: 'DM Sans', sans-serif; font-size: 12px; }
+    .label-purple { fill: var(--purple-800); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; }
+    .label-sub-purple { fill: var(--purple-600); font-family: 'DM Sans', sans-serif; font-size: 12px; }
+
+    .node { cursor: pointer; }
+    .node:hover polygon { opacity: 0.88; }
+    .node:hover { transition: opacity 0.15s; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <h1>Learning Brain Hierarchy</h1>
+    <p>Perry &amp; Purnell Model &mdash; information processes bottom-up</p>
+  </header>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 680 560" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Learning Brain Hierarchy — Perry/Purnell Model</title>
+      <desc>Bottom-up pyramid showing four brain regions: Brainstem (Autonomic), Diencephalon (Arousal), Limbic (Affiliation), and Neocortex (Rigor).</desc>
+
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Title -->
+      <text class="th" x="340" y="26" text-anchor="middle" font-size="16">Learning Brain Hierarchy</text>
+      <text class="ts" x="340" y="46" text-anchor="middle">Perry / Purnell model — information processes bottom-up</text>
+
+      <!-- Upward arrow -->
+      <line x1="54" y1="520" x2="54" y2="100" stroke-width="1.5" stroke="#888780" marker-end="url(#arrow)"/>
+      <text class="ts" x="44" y="320" text-anchor="middle" transform="rotate(-90 44 320)" fill="#888780">Bottom-up processing</text>
+
+      <!-- Layer 1: BRAINSTEM -->
+      <g class="node" onclick="">
+        <polygon points="100,540 580,540 518,460 162,460" fill="var(--coral-50)" stroke="var(--coral-400)" stroke-width="0.5"/>
+        <text class="label-coral" x="340" y="494" text-anchor="middle" dominant-baseline="central">Brainstem</text>
+        <text class="label-sub-coral" x="340" y="516" text-anchor="middle" dominant-baseline="central">Autonomic regulation</text>
+      </g>
+      <text class="ts" x="596" y="483" dominant-baseline="central">Safety · Survival</text>
+      <text class="ts" x="596" y="500" dominant-baseline="central">Heart rate · Breathing</text>
+      <line x1="518" y1="490" x2="591" y2="490" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- Layer 2: DIENCEPHALON -->
+      <g class="node" onclick="">
+        <polygon points="162,456 518,456 460,376 220,376" fill="var(--amber-50)" stroke="var(--amber-400)" stroke-width="0.5"/>
+        <text class="label-amber" x="340" y="410" text-anchor="middle" dominant-baseline="central">Diencephalon</text>
+        <text class="label-sub-amber" x="340" y="432" text-anchor="middle" dominant-baseline="central">Arousal &amp; alertness</text>
+      </g>
+      <text class="ts" x="596" y="402" dominant-baseline="central">Movement · Rhythm</text>
+      <text class="ts" x="596" y="419" dominant-baseline="central">Regulation · Tone</text>
+      <line x1="460" y1="408" x2="591" y2="408" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- Layer 3: LIMBIC -->
+      <g class="node" onclick="">
+        <polygon points="220,372 460,372 402,292 278,292" fill="var(--teal-50)" stroke="var(--teal-400)" stroke-width="0.5"/>
+        <text class="label-teal" x="340" y="325" text-anchor="middle" dominant-baseline="central">Limbic system</text>
+        <text class="label-sub-teal" x="340" y="347" text-anchor="middle" dominant-baseline="central">Affiliation &amp; emotion</text>
+      </g>
+      <text class="ts" x="596" y="321" dominant-baseline="central">Belonging · Trust</text>
+      <text class="ts" x="596" y="338" dominant-baseline="central">Emotional memory</text>
+      <line x1="402" y1="328" x2="591" y2="328" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- Layer 4: NEOCORTEX -->
+      <g class="node" onclick="">
+        <polygon points="278,288 402,288 356,208 324,208" fill="var(--purple-50)" stroke="var(--purple-400)" stroke-width="0.5"/>
+        <text class="label-purple" x="340" y="242" text-anchor="middle" dominant-baseline="central">Neocortex</text>
+        <text class="label-sub-purple" x="340" y="264" text-anchor="middle" dominant-baseline="central">Abstract thought</text>
+      </g>
+      <text class="ts" x="596" y="240" dominant-baseline="central">Reason · Language</text>
+      <text class="ts" x="596" y="257" dominant-baseline="central">Rigor · Abstraction</text>
+      <line x1="356" y1="246" x2="591" y2="246" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/>
+
+      <!-- Apex -->
+      <polygon points="324,204 356,204 340,174" fill="var(--purple-50)" stroke="var(--purple-400)" stroke-width="0.5"/>
+
+      <!-- Footer label -->
+      <text class="ts" x="340" y="556" text-anchor="middle" fill="#888780">Regulate → Relate → Reason — learning requires all three lower layers first</text>
+    </svg>
+  </div>
+
+  <!-- Info chips -->
+  <div class="layer-info">
+    <div class="chip chip-coral">
+      <div class="chip-label">Layer 1 — Base</div>
+      <div class="chip-title">Brainstem</div>
+      <div class="chip-sub">Autonomic · Safety · Survival · Heart rate · Breathing</div>
+    </div>
+    <div class="chip chip-amber">
+      <div class="chip-label">Layer 2 — Arousal</div>
+      <div class="chip-title">Diencephalon</div>
+      <div class="chip-sub">Alertness · Rhythm · Movement · Regulation</div>
+    </div>
+    <div class="chip chip-teal">
+      <div class="chip-label">Layer 3 — Relational</div>
+      <div class="chip-title">Limbic system</div>
+      <div class="chip-sub">Affiliation · Trust · Belonging · Emotion</div>
+    </div>
+    <div class="chip chip-purple">
+      <div class="chip-label">Layer 4 — Apex</div>
+      <div class="chip-title">Neocortex</div>
+      <div class="chip-sub">Rigor · Reasoning · Language · Abstraction</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Based on the Perry &amp; Purnell neurosequential model of learning &mdash; regulate, relate, then reason.</p>
+  </footer>
+</div>
+</body>
+</html>
